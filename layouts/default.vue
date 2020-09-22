@@ -1,75 +1,52 @@
 <template>
-  <div class="flex h-screen bg-gray-100 font-sans">
-    <div
-      id="sidebar"
-      class="h-screen w-16 menu bg-white text-white px-4 flex items-center nunito static fixed shadow"
+  <a-layout style="position: relative">
+    <a-layout-sider
+      v-model="collapsed"
+      :trigger="null"
+      collapsible
+      class="absolute"
     >
-      <ul class="list-reset">
-        <li class="my-2 md:my-0">
-          <a
-            href="#"
-            class="block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400"
-          >
-            <i class="mdi mdi-home w-5 mr-3"></i
-            ><span class="w-full inline-block pb-1 md:pb-0 text-sm">Home</span>
-          </a>
-        </li>
-        <li class="my-2 md:my-0">
-          <a
-            href="#"
-            class="block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400"
-          >
-            <i class="mdi mdi-gamepad w-5 mr-3 text-lg"></i
-            ><span class="w-full inline-block pb-1 md:pb-0 text-sm">Game</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div
-      id="dash-content"
-      class="bg-gray-200 py-6 lg:py-0 w-full flex flex-wrap content-start"
-    >
+      <div
+        class="h-full flex items-center"
+        @mouseenter="collapsed = false"
+        @mouseleave="collapsed = true"
+      >
+        <a-menu mode="inline" :default-selected-keys="[active]" theme="dark">
+          <a-menu-item key="index">
+            <nuxt-link :to="{ name: 'index' }">
+              <a-icon :component="home" :style="{ fontSize: '20px' }"></a-icon>
+              <span>Home</span>
+            </nuxt-link>
+          </a-menu-item>
+          <a-menu-item key="game">
+            <nuxt-link :to="{ name: 'game' }">
+              <a-icon :component="game" :style="{ fontSize: '20px' }"></a-icon>
+              <span>Game</span>
+            </nuxt-link>
+          </a-menu-item>
+        </a-menu>
+      </div>
+    </a-layout-sider>
+    <a-layout class="h-screen">
       <Nuxt />
-    </div>
-  </div>
+    </a-layout>
+  </a-layout>
 </template>
 
-<style>
-.nunito {
-  font-family: 'Nunito', sans-serif;
-}
+<script>
+import { home, game } from '@/components/icons'
 
-.border-b-1 {
-  border-bottom-width: 1px;
+export default {
+  data() {
+    return {
+      home,
+      game,
+      active: undefined,
+      collapsed: true,
+    }
+  },
+  created() {
+    this.active = this.$route.name
+  },
 }
-
-.border-l-1 {
-  border-left-width: 1px;
-}
-
-.border-none:hover {
-  border-style: none;
-}
-
-#sidebar {
-  transition: ease-in-out all 0.3s;
-  z-index: 9999;
-}
-
-#sidebar span {
-  opacity: 0;
-  position: absolute;
-  transition: ease-in-out all 0.1s;
-}
-
-#sidebar:hover {
-  width: 150px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-
-  /* shadow-2xl */
-}
-
-#sidebar:hover span {
-  opacity: 1;
-}
-</style>
+</script>
