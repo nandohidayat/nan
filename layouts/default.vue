@@ -1,11 +1,6 @@
 <template>
   <a-layout style="position: relative">
-    <a-layout-sider
-      v-model="collapsed"
-      :trigger="null"
-      collapsible
-      class="absolute"
-    >
+    <a-layout-sider v-model="collapsed" :trigger="null" collapsible>
       <div
         class="h-full flex items-center"
         @mouseenter="collapsed = false"

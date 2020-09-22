@@ -14,14 +14,23 @@
       shape="round"
       size="large"
       style="position: fixed; bottom: 20px; right: 20px"
+      @click="visible = true"
       ><a-icon :component="plus" style="vertical-align: 0.12em"></a-icon>
       Insert</a-button
     >
+    <a-drawer
+      title="New Transaction"
+      :width="720"
+      :visible="visible"
+      @close="visible = false"
+    ></a-drawer>
+    <mobile-legends-form v-model="visible"></mobile-legends-form>
   </div>
 </template>
 
 <script>
 import { plus, diamondLinear } from '@/components/icons'
+import MobileLegendsForm from '@/components/game/mobile-legends-form'
 
 const formatter = new Intl.NumberFormat('id-ID', {
   style: 'currency',
@@ -33,6 +42,9 @@ const formatter = new Intl.NumberFormat('id-ID', {
 })
 
 export default {
+  components: {
+    MobileLegendsForm,
+  },
   filters: {
     currency(val) {
       return formatter.format(val)
@@ -65,6 +77,7 @@ export default {
         },
       ],
       total: 0,
+      visible: false,
     }
   },
 }
