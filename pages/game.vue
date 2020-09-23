@@ -8,8 +8,10 @@
               :component="diamond"
               :style="{ fontSize: '20px' }"
             ></a-icon>
+
             <span>Assets</span></span
           >
+
           <a-menu-item key="game-mobile-legends">
             <nuxt-link :to="{ name: 'game-mobile-legends' }">
               Mobile Legends

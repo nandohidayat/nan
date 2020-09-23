@@ -10,18 +10,22 @@
           <a-menu-item key="index">
             <nuxt-link :to="{ name: 'index' }">
               <a-icon :component="home" :style="{ fontSize: '20px' }"></a-icon>
+
               <span>Home</span>
             </nuxt-link>
           </a-menu-item>
+
           <a-menu-item key="game">
             <nuxt-link :to="{ name: 'game' }">
               <a-icon :component="game" :style="{ fontSize: '20px' }"></a-icon>
+
               <span>Game</span>
             </nuxt-link>
           </a-menu-item>
         </a-menu>
       </div>
     </a-layout-sider>
+
     <a-layout class="h-screen">
       <Nuxt />
     </a-layout>
@@ -35,11 +39,15 @@ export default {
   data() {
     return {
       home,
+
       game,
+
       active: undefined,
+
       collapsed: true,
     }
   },
+
   created() {
     this.active = this.$route.name
   },
